@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>News</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+
+<div class="jumbotron" style="color:black">
+
+    <div class="column">
+        <div align="center">
+      <h1 style ="color:Black;">
+        Get The latest news on our website
+      </h1>
+    <h3>Country : {{country}}</h3>
+    </div>
+    </div>
+
+<div align="center">
+<form method="post" action="{% url 'index' %}">
+    {% csrf_token %}
+    Enter country name:-
+    <select name="country">
+        {% for i in con %}
+        <option value="{{i.code}}">{{i.name}}</option>
+        {% endfor %}
+    </select>
+    <input type="submit">
+
+</form>
+</div>
+</div>
+<div class="container">
+    {% for news in mylist %}
+    <img src="{{news.image}}" alt="Image" style="width:1000px;height:500px;">
+    <h1>News :</h1>{{news.title}}
+    {{value|linebreaks}}
+
+    <h4>Description :</h4>
+    {{news.description}}
+    {{value|linebreaks}}
+
+    {% endfor %}
+</div>
+</body>
+</html>
